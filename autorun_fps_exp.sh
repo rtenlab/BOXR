@@ -24,7 +24,7 @@ do
 	echo "Starting exp: $i fps..."
 	# Special Variable SECONDS
 	SECONDS=0
-	main.dbg.exe --plugins=offline_imu,offline_cam,gtsam_integrator,pose_prediction,gldemo,timewarp_gl --vis=openvins --data=/home/ziliang/Developer/Git/ILLIXR/data/mav0 --demo_data=/home/ziliang/Developer/Git/ILLIXR/demo_data --enable_offload=false --enable_alignment=false --enable_verbose_errors=false --enable_pre_sleep=false > "$logfile" 2>&1
+	main.dbg.exe --plugins=offline_imu,offline_cam,gtsam_integrator,pose_prediction,gldemo,timewarp_gl --vis=openvins --data=<path_here> --demo_data=<path_here> --enable_offload=false --enable_alignment=false --enable_verbose_errors=false --enable_pre_sleep=false > "$logfile" 2>&1
 	duration=$SECONDS
 	echo "exp $i fps Finished in $duration seconds"
 
@@ -35,7 +35,7 @@ do
 	echo "Starting exp: $i fps..."
 	# Special Variable SECONDS
 	SECONDS=0
-	main.dbg.exe --plugins=offline_imu,offline_cam,gtsam_integrator,pose_prediction,gldemo,timewarp_gl --vis=openvins --data=/home/ziliang/Developer/Git/ILLIXR/data/mav0 --demo_data=/home/ziliang/Developer/Git/ILLIXR/demo_data --enable_offload=false --enable_alignment=false --enable_verbose_errors=false --enable_pre_sleep=false > "$logfile" 2>&1
+	main.dbg.exe --plugins=offline_imu,offline_cam,gtsam_integrator,pose_prediction,gldemo,timewarp_gl --vis=openvins --data=<path_here> --demo_data=<path_here> --enable_offload=false --enable_alignment=false --enable_verbose_errors=false --enable_pre_sleep=false > "$logfile" 2>&1
 	duration=$SECONDS
 	echo "exp $i fps Finished in $duration seconds"
 done
