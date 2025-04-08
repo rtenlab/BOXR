@@ -88,7 +88,9 @@ We provide setup documentation for two platforms: PC and Xavier (Embedded System
 6. if you have the data.zip in the repo root, please extract it there. Or you will have segmentation fault when running.  
 7. Run with the following command. Use Sudo as well. Make sure to replace `<path_here>` to the <strong>ABSOLUTE PATH</strong> of the `data=` and `demo_data=`. You can see `illixr.yaml` in repo root after building `<path_here>`
     ```shell
-    # use sudo, I removed the debugview and audio but you can refer to illixr.yaml for full plugins
+    # Option 1, run with illixr.yaml, maybe useful for xavier
+    main.dbg.exe -y illixr.yaml 
+    # Option 2, removed the debugview and audio but you can refer to illixr.yaml for full plugins
     main.dbg.exe --plugins=offline_imu,offline_cam,gtsam_integrator,pose_prediction,gldemo,timewarp_gl --vis=openvins --data=<path_here> --demo_data=<path_here> --enable_offload=false --enable_alignment=false --enable_verbose_errors=false --enable_pre_sleep=false
     ```
 8. When you change the code in this repo (i.e. does not change OpenVINS), you can easily rebuild the BOXR project with [rebuild.sh](rebuild.sh)
