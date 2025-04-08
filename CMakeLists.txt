@@ -216,9 +216,6 @@ foreach(PLUGIN_NAME IN LISTS FULL_PLUGIN_LIST)
 endforeach()
 set(CURRENT_BUILD_DIR "${CMAKE_CURRENT_BINARY_DIR}" CACHE INTERNAL "")
 
-# set up documentaiton build
-add_subdirectory(docs)
-
 # deal with the data file if there is one
 if(DATA_FILE)
     string(REGEX MATCH "^http" HAVE_MATCH ${DATA_FILE})
