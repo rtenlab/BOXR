@@ -95,7 +95,7 @@ We provide setup documentation for two platforms: PC and Xavier (Embedded System
 
 ### Xavier Setup
 1. BOXR has been tested on the following embedded systems: Nvidia Jetson AGX Xavier, Nvidia Jetson Orin Nano. We recommend first try with the Xavier and then move on to Nano.
-2. Follow the [Step 1 and 2 of the PC Setup](#pc-setup). However, when you see the below error when `sudo apt-get install` below, this means some pacakges cannot be found in ARM
+2. Follow the [Step 1 and 3 of the PC Setup](#pc-setup). However, when you see the below error when `sudo apt-get install` below, this means some pacakges cannot be found in ARM
     ```shell
     # sudo apt-get install ...
     ...
@@ -106,13 +106,16 @@ We provide setup documentation for two platforms: PC and Xavier (Embedded System
 3. We will try to fix it using the following 
     - Try to see the specific versions are needed, and search google: libtiff-dev ubuntu 20.04. ***Be Sure to match the package version***
     - Install the dependencies, and then run the `sudo apt-get install` again until you see no missing pacakges
-4. There may also be a problem when isntalling OpenCV. During the build process, you may encounter the compilation failure like `cannot import opencv2/...`. This may due to the lack of `libopencv-contrib4.2` or mis-match version of `libopencv-dev` and `libopencv-contrib`. Be sure to check the version with below lines:
+4. There may also be a problem when installing or compileing OpenCV. During the build process, you may encounter the compilation failure like `cannot import opencv2/...` or `opencv/auroc.h not found`. This may due to the lack of `libopencv-contrib4.2` or mis-match version of `libopencv-dev` and `libopencv-contrib`. Be sure to check the version with below lines:
     ```shell
     dpkg -l libopencv-dev
     dpkg -l libopencv-contrib
     ```
-    If you see missing or mis-match, please fix accordingly
-
+    For 20.04 on Xavier or Nano, we need opencv 4.2. If you see missing or mis-match, you can fix the problem with the following lines:
+    ```shell
+    sudo apt-get install libopencv-dev=4.2.0+dfsg-5
+    sudo apt-get install libopencv-contrib4.2
+    ```
 ## Change the evaluation trajectory
 By default, the `data.zip` automatically downloaded is from EuRoC MAV Dataset Vicon room 1 “medium”. You can download additional trajectories from [The EuRoC MAV Dataset][9]. Please download the ASL dataset format and unpack it. 
 
