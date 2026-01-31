@@ -81,6 +81,24 @@ public:
         int          screen  = DefaultScreen(dpy);
         GLXFBConfig* fbc     = glXChooseFBConfig(dpy, screen, visual_attribs, &fbcount);
         if (!fbc) {
+#ifndef NDEBUG
+            spdlog::get("illixr")->warn("[extended_window] Failed to retrieve strict framebuffer config. Retrying with relaxed attributes...");
+#endif
+            static int relaxed_attribs[] = {GLX_X_RENDERABLE,
+                                            True,
+                                            GLX_DRAWABLE_TYPE,
+                                            GLX_WINDOW_BIT,
+                                            GLX_RENDER_TYPE,
+                                            GLX_RGBA_BIT,
+                                            GLX_X_VISUAL_TYPE,
+                                            GLX_TRUE_COLOR,
+                                            GLX_DOUBLEBUFFER,
+                                            True,
+                                            None};
+            fbc                          = glXChooseFBConfig(dpy, screen, relaxed_attribs, &fbcount);
+        }
+
+        if (!fbc) {
             ILLIXR::abort("Failed to retrieve a framebuffer config");
         }
 

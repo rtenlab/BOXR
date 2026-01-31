@@ -22,7 +22,7 @@
 
 <p> Apple Vision Pro UI Drift video: <a href="https://youtu.be/LTVuGsYY2yc">https://youtu.be/LTVuGsYY2yc</a></p>
 
-This Repo is the implementation of the <Strong>BOXR</strong>: Body and head motion Optimization framework for eXtended Reality, which is developed on top of the well-known open-sourced Extended Reality framework <strong>ILLIXR</strong>: Illinois Extended Reality testbed. The major changes can be found below:
+This Repo is the implementation of the **BOXR**: Body and head motion Optimization framework for eXtended Reality, which is developed on top of the well-known open-sourced Extended Reality framework **ILLIXR**: Illinois Extended Reality testbed. The major changes can be found below:
 * a new scheudler based on the contention-preventive scheduling policy proposed in the paper
 * a motion-driven visual inertial odometer (MVIO) included in https://github.com/izenderi/open_vins_illixr.git
 * a scene-dependent foveated rendering (SFR) that works with OpenGL.
@@ -52,12 +52,24 @@ We provide setup documentation for two platforms: PC and Xavier (Embedded System
 - [ZED Mini Stereo Camera][5]: Only if you plan to [connect BOXR with ZED](#connect-boxr-with-zed)
 - PC with a GPU or Xavier depends on which platform you want
 
+### New Setup Mehtod for both PC and Jetson Series (Ubuntu 22.04 or higher)
+
+1. in the repo root, run `sudo ./install_deps.sh`
+2. Download the dataset from [ILLIXR Dataset](https://illixr.github.io/ILLIXR/data/), 
+   `wget https://robotics.ethz.ch/~asl-datasets/ijrr_euroc_mav_dataset/vicon_room1/V1_02_medium/V1_02_medium.zip -O data.zip`
+3. in the repo root, run `init_build.sh`
+
+4. in the repo root, run `./run.sh -y illixr.yaml`
+
+5. enjoy!
+
 ### PC Setup
+
 1. Please use the following configurations for OS and Hardware. We will be using native.gl config of ILLIXR
     - a PC with at least one GPU that can support OpenGL. Ideally Nvidia RTX series (RTX30xx, RTX40xx, etc.)
-    - Ubuntu 20.04 or 22.04
-2. <strong>[Skip if you are using 22.04]</strong> Install the monado plugin for OpenXR
-    ```shell
+    - Ubuntu 20.04 or 22.04 or 24.04
+2. **[Skip if you are using 22.04 or higher]** Install the monado plugin for OpenXR
+    ```bash
     sudo apt-get -y install wget software-properties-common
     sudo apt-get update
     sudo add-apt-repository ppa:monado-xr/monado -y -u
@@ -76,7 +88,7 @@ We provide setup documentation for two platforms: PC and Xavier (Embedded System
     export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
     sudo ldconfig # for sudo usage, LD_LIBRARY_PATH will pass to sudo with this line
     ```
-5. <strong>[Use sudo]</strong> If you are building for the first time, build the project with the provided script [init_build.sh](init_build.sh). it has to be built in <strong>sudo</strong> for our implementation to work However, if you are facing some problem like "fatal: remote hungup", please try manually build line-by-line with the following commands:
+5. If you are building for the first time, build the project with the provided script [init_build.sh](init_build.sh). If you are facing some problem like "fatal: remote hungup", please try manually build line-by-line with the following commands:
     ```shell
     # Use Sudo 
     rm -rf build/ && mkdir build && cp data.zip ./build && cd build
@@ -86,7 +98,7 @@ We provide setup documentation for two platforms: PC and Xavier (Embedded System
     cmake --install .
     ```
 6. if you have the data.zip in the repo root, please extract it there. Or you will have segmentation fault when running.  
-7. Run with the following command. Use Sudo as well. Make sure to replace `<path_here>` to the <strong>ABSOLUTE PATH</strong> of the `data=` and `demo_data=`. You can see `illixr.yaml` in repo root after building `<path_here>`
+7. Run with the following command. Use Sudo as well. Make sure to replace `<path_here>` to the **ABSOLUTE PATH** of the `data=` and `demo_data=`. You can see `illixr.yaml` in repo root after building `<path_here>`
     ```shell
     # Option 1, run with illixr.yaml, maybe useful for xavier
     main.dbg.exe -y illixr.yaml 

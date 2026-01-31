@@ -46,13 +46,21 @@ int ILLIXR::run(const cxxopts::ParseResult& options) {
             ? std::chrono::seconds{std::stol(std::string{getenv("ILLIXR_RUN_DURATION")})}
             : ILLIXR_RUN_DURATION_DEFAULT;
     }
+    std::cout << "Debug: Processing options..." << std::endl;
     GET_STRING(data, ILLIXR_DATA)
+    std::cout << "Debug: data done." << std::endl;
     GET_STRING(demo_data, ILLIXR_DEMO_DATA)
+    std::cout << "Debug: demo_data done." << std::endl;
     GET_BOOL(enable_offload, ILLIXR_OFFLOAD_ENABLE)
-    GET_BOOL(alignment_enable, ILLIXR_ALIGNMENT_ENABLE)
+    std::cout << "Debug: enable_offload done." << std::endl;
+    GET_BOOL(enable_alignment, ILLIXR_ALIGNMENT_ENABLE)
+    std::cout << "Debug: enable_alignment done." << std::endl;
     GET_BOOL(enable_verbose_errors, ILLIXR_ENABLE_VERBOSE_ERRORS)
+    std::cout << "Debug: enable_verbose_errors done." << std::endl;
     GET_BOOL(enable_pre_sleep, ILLIXR_ENABLE_PRE_SLEEP)
+    std::cout << "Debug: enable_pre_sleep done." << std::endl;
     GET_STRING(realsense_cam, REALSENSE_CAM)
+    std::cout << "Debug: realsense_cam done." << std::endl;
 
     setenv("__GL_MaxFramesAllowed", "1", false);
     setenv("__GL_SYNC_TO_VBLANK", "1", false);

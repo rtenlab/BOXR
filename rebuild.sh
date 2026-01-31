@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 cd build
 cmake --build . -j$(nproc)
-cmake --install .
+cmake --install . --prefix ./install

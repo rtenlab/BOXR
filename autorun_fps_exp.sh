@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Base directory for experiments
 base_dir="fps_exp"

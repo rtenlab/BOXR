@@ -10,6 +10,10 @@
 
 cmake_minimum_required(VERSION 3.16)
 
+if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
+    set(CMAKE_INSTALL_PREFIX "${CMAKE_BINARY_DIR}/install" CACHE PATH "Default install prefix" FORCE)
+endif()
+
 set(CMAKE_VERBOSE_MAKEFILE True)
 
 if (POLICY CMP0048)
@@ -63,6 +67,8 @@ project(ILLIXR VERSION 3.2.0)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 add_definitions(-DGLSL_VERSION="330")
+add_definitions(-DSPDLOG_FMT_EXTERNAL)
+find_package(fmt REQUIRED)
 
 set(CMAKE_CXX_FLAGS_DEBUG "-ggdb -Wall -Wextra -rdynamic -Wno-attributes -Wno-unknown-pragmas -fPIC")
 set(CMAKE_CXX_FLAGS_RELEASE "-O3 -DNDEBUG -Wall -Wextra -Wno-attributes -Wno-unknown-pragmas -fPIC")
@@ -124,9 +130,9 @@ endif()
 
 set(CMAKE_PREFIX_PATH "${CMAKE_INSTALL_PREFIX}/lib/cmake ${CMAKE_INSTALL_PREFIX}/lib64/cmake")
 
-set(ENV{PKG_CONFIG_PATH} "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig:${CMAKE_INSTALL_PREFIX}/lib64/pkgconfig")
+set(ENV{PKG_CONFIG_PATH} "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig:${CMAKE_INSTALL_PREFIX}/lib64/pkgconfig:$ENV{PKG_CONFIG_PATH}")
 
-link_directories(BEFORE ${CMAKE_INSTALL_PREFIX}/lib ${CMAKE_INSTALL_PREFIX}/lib64)
+link_directories(BEFORE ${CMAKE_BINARY_DIR}/install/lib ${CMAKE_INSTALL_PREFIX}/lib ${CMAKE_INSTALL_PREFIX}/lib64)
 include_directories(BEFORE ${CMAKE_SOURCE_DIR}/include)
 
 find_package(PkgConfig REQUIRED)
@@ -244,7 +250,7 @@ if(ILLIXR_PROFILE_NAMES)
         install(FILES "profiles/${GRP}.yaml"
                 DESTINATION $ENV{HOME}/.illixr/profiles)
         install(FILES "profiles/${GRP}.yaml"
-                DESTINATION ${CMAKE_INSTALL_PREFIX}/share/illixr/profiles)
+                DESTINATION share/illixr/profiles)
     endforeach()
 endif()
 

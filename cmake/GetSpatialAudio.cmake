@@ -11,7 +11,7 @@ else()
             GIT_TAG 12a48a20e45d9a7203d49821e2c4f253c8f933b7               # sha5 hash for specific commit to pull (if there is no specific tag to use)
             PREFIX ${CMAKE_BINARY_DIR}/_deps/spatialaudio                  # the build directory
             # arguments to pass to CMake
-            CMAKE_ARGS -DCMAKE_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX} -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_LIBDIR=lib
+            CMAKE_ARGS -DCMAKE_INSTALL_PREFIX=${CMAKE_BINARY_DIR}/install -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_LIBDIR=lib
             )
     # set variables for use by modules that depend on this one
     set(SpatialAudio_DEP_STR "SpatialAudio")   # Dependency string for other modules that depend on this one
